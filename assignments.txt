@@ -1,0 +1,13 @@
+next class:
+Ubuntu os: 16.04, 18.04
+install python3
+create one virtualenvironment, install django init.
+django 2.x
+
+
+Assignments:
+create ERP project: sales, purchase, accounts applications. Write atleast two urls for each application.
+
+
+signup to github
+signup to docker.hub.com
