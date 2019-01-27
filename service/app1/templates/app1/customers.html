@@ -1,0 +1,11 @@
+{% extends 'app1/index.html'%}
+
+{% block content %}
+	<a href="/cust_create"> CREATE CUSTOMER</a>
+{% for row in data%}
+<p>{{ row.name }},{{ row.email}}
+	<a href="/cust_update/{{row.id}}">Update</a>
+	<a href="/cust_delete/{{row.id}}">Delete</a>
+</p>
+{% endfor %}
+{% endblock %} 

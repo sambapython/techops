@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.http import HttpResponse
-from app1.views import fun, CustomerAPIView
-
+from app1.views import fun, CustomerAPIView, cust_create_view, \
+cust_update_view, cust_delte_view,customers_view, index_view
 #def fun(request):
 #	return HttpResponse("Hello django")
 
@@ -25,6 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', fun),
     path('customers/', CustomerAPIView.as_view()),
-
-    
+    path('cust_create/', cust_create_view),
+    re_path('cust_update/([0-9]+)/', cust_update_view),
+    re_path('cust_delete/([0-9]+)/', cust_delte_view),
+    path('web_customers/', customers_view),
+     path('', index_view),
 ]

@@ -1,0 +1,11 @@
+{% extends 'app1/index.html'%}
+{% block content %}
+	<h1> customer creation form</h1>
+	{{ msg }}
+	<form method="post">
+		{% csrf_token %}
+		name: <input type="text" name="cust_name">
+		email: <input type="text" name="cust_email">
+		<input type="submit" name="">
+	</form>
+{% endblock %}
