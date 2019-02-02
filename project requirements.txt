@@ -1,0 +1,11 @@
+kinds of leaves: casual leave, sick leave, compensate leave, previliged leaves, maternity leaves,
+marrtiage leaves, paid leaves.
+status of leaves: draft, pending,approved, deny, canceled, completed
+employee status: active and inactive
+
+functionalities are:
+you need to registers as an employee 
+this registrations should approved by manager
+aftre approved as an employee you can apply for leaves.
+
+
