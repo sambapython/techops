@@ -1,0 +1,12 @@
+{%extends 'main/home.html'%} 
+{% block menu%}
+		{{  block.super }}
+      <li><a href="/leaves">Leave</a></li>
+      <li><a href="/leavetypes">LeaveType</a></li>
+       <li><a href="/logout">LOGOUT</a></li>
+       {% if request.user.is_authenticated %}
+       <li><a href="">WELECOME {{request.user.username}}</a></li>
+       {% endif %}
+{% endblock %}
+{% block content%}
+{% endblock %}  

@@ -12,6 +12,9 @@ class LeaveType(models.Model):
 	name=models.CharField(max_length=250)
 	count=models.IntegerField()
 
+	def __str__(self):
+		return self.name
+
 class Leave(models.Model):
 	desc=models.TextField(blank=True, null=True)
 	type=models.ForeignKey(LeaveType, on_delete=models.PROTECT)

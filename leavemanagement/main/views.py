@@ -1,9 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from main.forms import UserRegForm
 from main.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here..
+@login_required
+def logout_view(request):
+	logout(request)
+	return redirect("/")
+	
 def home_view(request):
 	msg=""
 	if request.method=="POST":
@@ -11,7 +17,11 @@ def home_view(request):
 		user = authenticate(username=data["username"], 
 		password=data["password"])
 		if user:
-			msg="Login successfully"
+			#request.session.update({"username":user.username})
+			login(request, user)
+			url=request.GET.get("next","/index/")
+			return redirect(url)
+			msg="Login successfull"
 		else:
 			msg="Login failed"
 	return render(request,"main/home.html",{"msg":msg})

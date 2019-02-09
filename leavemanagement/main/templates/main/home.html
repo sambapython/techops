@@ -16,7 +16,9 @@
       <a class="navbar-brand" href="/">LEAVE MANAGEMENT</a>
     </div>
     <ul class="nav navbar-nav">
+      {% block menu%}
       <li class="active"><a href="/">Home</a></li>
+      {% endblock %}
       
     </ul>
   </div>
@@ -26,14 +28,18 @@
   <br>
   {% block content %}
   {{ msg }}
-  <form method="post">
-    {% csrf_token %}
-    Username: <input type="text" name="username"><br>
-    password: <input type="password" name="password"><br>
-    <input type="submit" name="">
-  </form>
-  <br>
-  <a href="/register">REGISTER</a>
+  {% if request.user.is_authenticated %}
+    <p> USER AUTHETICATED</p>
+  {% else %}
+      <form method="post">
+        {% csrf_token %}
+        Username: <input type="text" name="username"><br>
+        password: <input type="password" name="password"><br>
+        <input type="submit" name="">
+      </form>
+      <br>
+      <a href="/register">REGISTER</a>
+  {% endif %}
   {% endblock %}
 </div>
 

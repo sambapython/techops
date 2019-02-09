@@ -14,14 +14,38 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.views.generic import TemplateView
-from main.views import user_register, home_view
+from django.urls import path, re_path
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView,\
+ DeleteView
+from main.views import user_register, home_view, logout_view
+from main.models import Leave
+from django.contrib.auth.decorators import login_required
 urlpatterns = [
+    path("logout/",logout_view),
     path('admin/', admin.site.urls),
-
     path('', home_view),
     path('register/', user_register),
-    #path('', home_view),
-
+    path('index/', TemplateView.as_view(template_name="main/index.html")),
+    path('leaves/', login_required(ListView.as_view(
+        model=Leave,
+        #template_name="main/leave_list.html"
+        ))),
+    path('leave_create/', login_required(CreateView.as_view(
+        model=Leave,
+        #fields="__all__",
+        fields=["desc","type","leavedate","user"],
+        success_url="/leaves/",
+        #template_name="main/leave_form.html"
+        ))),
+    re_path('leave_update/(?P<pk>[0-9]+)',login_required(UpdateView.as_view(
+        model=Leave,
+        fields=["desc","type","leavedate","user"],
+        success_url="/leaves",
+        template_name="main/leave_update_form.html"
+        ))),
+    re_path("leave_delete/(?P<pk>[0-9]+)",login_required(DeleteView.as_view(
+            model=Leave,
+            success_url="/leaves",
+            #template_name="main/leave_confirm_delete.html"
+        )))
 ]
