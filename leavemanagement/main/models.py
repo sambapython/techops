@@ -11,6 +11,7 @@ class User(AbstractUser):
 class LeaveType(models.Model):
 	name=models.CharField(max_length=250)
 	count=models.IntegerField()
+	pic=models.FileField(blank=True, null=True)
 
 	def __str__(self):
 		return self.name

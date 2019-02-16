@@ -25,7 +25,7 @@ SECRET_KEY = '$k&2w$n3(cotf2pz**ruoq3-=doxbr+dskvcobk$+cc+kip1*j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'main.middlewares.RequestTracker',
 ]
 
 ROOT_URLCONF = 'leavemanagement.urls'
@@ -121,3 +122,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 AUTH_USER_MODEL='main.User'
 LOGIN_URL="/"
+
+MEDIA_URL="/media/"
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')

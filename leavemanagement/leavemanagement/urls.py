@@ -18,8 +18,10 @@ from django.urls import path, re_path
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView,\
  DeleteView
 from main.views import user_register, home_view, logout_view
-from main.models import Leave
+from main.models import Leave, LeaveType
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path("logout/",logout_view),
     path('admin/', admin.site.urls),
@@ -47,5 +49,28 @@ urlpatterns = [
             model=Leave,
             success_url="/leaves",
             #template_name="main/leave_confirm_delete.html"
+        ))),
+    path('leavetypes/', login_required(ListView.as_view(
+        model=LeaveType,
+        #template_name="main/leave_list.html"
+        ))),
+    path('leavetypes_create/', login_required(CreateView.as_view(
+        model=LeaveType,
+        fields="__all__",
+        #fields=["desc","type","leavedate","user"],
+        success_url="/leavetypes/",
+        #template_name="main/leave_form.html"
+        ))),
+    re_path('leavetypes_update/(?P<pk>[0-9]+)',login_required(UpdateView.as_view(
+        model=LeaveType,
+        #fields=["desc","type","leavedate","user"],
+        fields="__all__",
+        success_url="/leavetypes",
+        template_name="main/leavetype_update_form.html"
+        ))),
+    re_path("leavetypes_delete/(?P<pk>[0-9]+)",login_required(DeleteView.as_view(
+            model=LeaveType,
+            success_url="/leavetypes",
+            #template_name="main/leave_confirm_delete.html"
         )))
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

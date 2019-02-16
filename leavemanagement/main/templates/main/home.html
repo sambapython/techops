@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static %}
   <title>Leave management</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static '/main/css/main.css'%}">
+  
+  <script type="text/javascript" src="{% static '/main/js/main.js'%}"></script>
 </head>
-<body style="height:1500px">
+<body style="height:1500px" background="{% static '/main/images/bg.jpeg' %}">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -46,9 +49,5 @@
   {% endif %}
   {% endblock %}
 </div>
-
-
-
-
 </body>
 </html>
