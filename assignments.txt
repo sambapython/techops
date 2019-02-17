@@ -1,0 +1,4 @@
+employee should see his leaves only
+manager should see all the leaves should update the status of the leave. can have a chance to 
+	create employees but not managers.
+super user could not see the leave menu. can see leave type and employees menus. make sure thta the superuser can add only the managers.
