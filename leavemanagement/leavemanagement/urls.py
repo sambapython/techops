@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView,\
  DeleteView
-from main.views import user_register, home_view, logout_view
+from main.views import user_register, home_view, logout_view, LeaveCreateView
 from main.models import Leave, LeaveType
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -32,13 +32,7 @@ urlpatterns = [
         model=Leave,
         #template_name="main/leave_list.html"
         ))),
-    path('leave_create/', login_required(CreateView.as_view(
-        model=Leave,
-        #fields="__all__",
-        fields=["desc","type","leavedate","user"],
-        success_url="/leaves/",
-        #template_name="main/leave_form.html"
-        ))),
+    path('leave_create/', login_required(LeaveCreateView.as_view())),
     re_path('leave_update/(?P<pk>[0-9]+)',login_required(UpdateView.as_view(
         model=Leave,
         fields=["desc","type","leavedate","user"],

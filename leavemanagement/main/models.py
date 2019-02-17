@@ -26,3 +26,47 @@ class Leave(models.Model):
 	date=models.DateTimeField(default=datetime.now)
 	leavedate=models.DateField()
 	user=models.ForeignKey(User, on_delete=models.PROTECT)
+
+
+# abstract, proxy, inherit
+class abs(models.Model):
+	name=models.CharField(max_length=250)
+	class Meta:
+		abstract=True
+
+class model1(abs):
+	sal=models.IntegerField()
+
+class model2(models.Model):
+	name=models.CharField(max_length=250)
+
+	def op1(self):
+		print("thisis op1")
+
+class proxy(model2):
+	def op2(self):
+		pass
+	class Meta:
+		proxy=True
+
+class sales(models.Model):
+	name=models.CharField(max_length=250)
+
+	def op1(self):
+		pass
+
+class sales_child(sales):
+	order=models.CharField(max_length=250)
+
+
+class products(models.Model):
+	name=models.CharField(max_length=250)
+
+
+class SalesOrder(models.Model):
+	products=models.ManyToManyField(products)
+	# salesorder has one2many relation with customer
+
+class customer(models.Model):
+	name=models.CharField(max_length=250)
+	so=models.ForeignKey(SalesOrder, on_delete=models.PROTECT)

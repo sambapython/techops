@@ -3,8 +3,39 @@ from main.forms import UserRegForm
 from main.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView
+from main.models import Leave
 
-# Create your views here..
+# Create your views here...
+class LeaveCreateView(CreateView):
+	model=Leave
+
+	fields=["desc","type","leavedate"]
+	success_url="/leaves/"
+	def get(self,request):
+		role=self.request.user.type
+		if role.lower()=="m":
+			self.fields=self.fields+["user"]
+		return CreateView.get(self,request)
+	#def post(self,request):
+	#	import pdb;pdb.set_trace()
+	#	CreateView.post(self,request)
+	def form_valid(self,form):
+		form_instance=form.instance 
+		if "user" in form.data.keys():
+			user_id=form.data.get('user')
+			user_instance = User.objects.get(id=user_id)
+			# user is a foreignkey in leave table. suppose to give instace of the user to
+			# the leave table to insert the records.
+			form_instance.user=user_instance
+		else:
+			form_instance.user=self.request.user
+		form_instance.save()
+		return redirect(self.success_url)
+	
+
+		
+
 @login_required
 def logout_view(request):
 	logout(request)
