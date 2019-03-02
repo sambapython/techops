@@ -1,0 +1,27 @@
+execute this to install postgres in ubuntu
+sudo apt-get install postgresql
+sudo apt-get install pgadmin3
+
+sudo su postgres  to create databases
+after entering to postgres user type
+psql
+this will show postgres command prompt
+create database main;
+change the user password using below query.
+postgres=# alter user postgres with password 'root';
+
+comeout from database console and postgres.
+
+mention below code in settings.py DATABASES section
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'main',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+ }
+
+ goto project folder and do makemigration and migrate

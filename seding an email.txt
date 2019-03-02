@@ -1,0 +1,14 @@
+seding an email:
+add below lines into settings:
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT=587
+EMAIL_HOST_USER="sambaodoo@gmail.com"
+EMAIL_HOST_PASSWORD=""
+EMAIL_USE_TLS=True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+And run the below lines in the shell  to test 
+
+ from django.core.mail import send_mail
+ send_mail('sendign email through my app','hello','sambaodoo@gmail.com',['pythonista.hlp@gmail.com','veereshpsr@gm
+...: ail.com'], fail_silently=False)

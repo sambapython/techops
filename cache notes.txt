@@ -1,0 +1,17 @@
+add the below settings into settings file
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}
+
+run the below command to create table in the database.
+python manage.py createcachetable
+
+from django.core.cache import cache 
+to save into cache: cache.set(key, value)
+to get from cache: cache.get(key)
+to delete from cache: casche.delete(key)
+
+To remove all cache need to say: cache.clear()

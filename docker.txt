@@ -1,0 +1,13 @@
+install docker using: sudo apt-get install docker.io
+
+after this need to execute few commands to access docker without sudo
+sudo groupadd docker
+sudo usermod -aG docker $USER
+create folder app
+and create Dockerfile with the below content
+FROM python:3
+docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+khyaathidajngo@KhyaathiDjango:~/app$ docker build .
+after the above command run docker images
+

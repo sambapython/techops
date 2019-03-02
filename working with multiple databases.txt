@@ -1,0 +1,37 @@
+add one more dictionary in the DATABASES section of settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'main',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+    'replica': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'replica',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+}
+
+
+Now need to migrate with the key of DATABASES: 
+python manage.py migrate --database replication
+
+while we are inserting or updating or getting need to metion the key name of database.
+example: 
+m1  = LeaveType(name="sick",count=2)
+ m1.save(using="replica") to store in replica database
+
+ m1  = LeaveType(name="sick",count=2)
+ m1.save() to sore in main database 
+
+LeaveType.objects.using('replica').all() to get from replica database.
+LeaveType.objects.all() to get from main database.
+
+from django.conf import settings
+[m1.save(using=db) for db in settings.DATABASES.keys()]
